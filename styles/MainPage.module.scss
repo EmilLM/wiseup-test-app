@@ -1,0 +1,52 @@
+.main {
+	width: 90%;
+	margin: 1em 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	// height: 70vh;
+	padding: 1rem;
+	min-height: 70vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.cardsContainer {
+	min-height: 60vh;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.paginationButtons {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	span {
+		font-size: 30px;
+		margin-bottom: 5px;
+	}
+	.previous,
+	.next {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font-size: 1rem;
+		font-weight: 600;
+		&:hover {
+			color: white;
+		}
+		&:disabled {
+			&:hover {
+				color: #1010104d;
+			}
+		}
+	}
+}
