@@ -1,4 +1,3 @@
-import { loadGetInitialProps } from 'next/dist/shared/lib/utils';
 import styles from '../../styles/Layout.module.scss';
 
 const Layout = (props) => {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import axios from 'axios';
 import styles from '../../styles/MainPage.module.scss';
 import PokemonCard from '../general/PokemonCard';
@@ -46,7 +45,7 @@ const AllPokemon = () => {
 					disabled={!pokemonData?.previous}
 					onClick={handlePrevious}
 				>
-					Previous{' '}
+					Previous
 				</button>
 				<span>|</span>
 				<button
