@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import styles from '../../styles/Comments.module.scss';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { CommentsContext } from '../general/CommentsContext';
 
 const Comment = ({ comment }) => {
 	const [iconColor, setIconColor] = useState(null);
+	const { removeComments } = useContext(CommentsContext);
 
 	useEffect(() => {
 		setIconColor('#' + Math.floor(Math.random() * 16777215).toString(16));
 	}, [comment]);
 
+	
 	return (
 		<div className={styles.commentCard}>
 			<div className={styles.nameIcon} style={{ background: iconColor }}>
@@ -23,6 +27,7 @@ const Comment = ({ comment }) => {
 
 				<p className={styles.comment}>{comment.comment}</p>
 			</div>
+			<AiOutlineCloseCircle onClick={() => removeComments(comment)} />
 		</div>
 	);
 };

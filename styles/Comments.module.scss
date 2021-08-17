@@ -64,22 +64,33 @@
 			}
 		}
 	}
+	svg {
+		margin: 0.3em;
+		cursor: pointer;
+		font-size: 1.2em;
+		color: white;
+		&:hover {
+			color: black;
+		}
+	}
 }
-
+.noComments {
+	text-align: center;
+}
 .formSection {
 	width: 100%;
-
+	display: flex;
+	justify-content: center;
 	@media screen and (min-width: 1000px) {
 		width: 40%;
 	}
 	form {
-		min-width: 300px;
+		width: 100%;
 		max-width: 500px;
 		min-height: 320px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-
 		label {
 			display: flex;
 			flex-direction: column;

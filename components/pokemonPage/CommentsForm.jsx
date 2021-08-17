@@ -2,14 +2,18 @@ import styles from '../../styles/Comments.module.scss';
 import { MdDoneAll } from 'react-icons/md';
 import { useState, useContext } from 'react';
 import { CommentsContext } from '../general/CommentsContext';
+import { getDate } from '../../utils/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 const CommentsForm = () => {
 	const [commentFormState, setCommentFormState] = useState({
 		name: '',
 		pokemonSeen: '',
 		comment: '',
+		date: getDate(),
+		id: uuidv4(),
 	});
-	const { comments, addComments } = useContext(CommentsContext);
+	const { addComments } = useContext(CommentsContext);
 
 	const handleChange = (e) => {
 		setCommentFormState({
@@ -26,7 +30,6 @@ const CommentsForm = () => {
 		e.preventDefault();
 		addComments(commentFormState);
 		console.log('form', commentFormState);
-		console.log('cxt', comments);
 		setCommentFormState({
 			name: '',
 			pokemonSeen: '',
