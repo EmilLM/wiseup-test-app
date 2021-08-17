@@ -33,3 +33,16 @@ export const getDate = () => {
 
 	return currentDate;
 };
+
+export const alternateCaps = (s) => {
+	const newArr = [];
+
+	for (let i = 0; i < s.length; i++) {
+		if (i % 2 === 0) {
+			newArr.push(s[i].toUpperCase());
+		} else {
+			newArr.push(s[i].toLowerCase());
+		}
+	}
+	return newArr;
+};

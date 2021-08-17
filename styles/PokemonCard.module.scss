@@ -15,12 +15,17 @@
 	}
 	svg {
 		font-size: 1.7em;
+		margin-top: 15px;
 		color: red;
 	}
 	a {
 		text-transform: capitalize;
 		font-weight: bold;
 		font-size: 1.1em;
+		font-family: 'Pokemon';
+		letter-spacing: 2px;
+		color: rgb(255, 203, 4);
+		-webkit-text-stroke: 1px blue;
 		&:hover {
 			color: white;
 		}

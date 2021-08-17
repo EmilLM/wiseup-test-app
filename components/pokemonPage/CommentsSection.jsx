@@ -1,32 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
 import styles from '../../styles/Comments.module.scss';
 import Comment from './Comment';
-import { getDate } from '../../utils/utils';
+import { CommentsContext } from '../general/CommentsContext';
 
-const currentDate = getDate();
-const initialState = [
-	{
-		name: 'Emil',
-		pokemonSeen: 5,
-		comment: 'Best pokemon ever! ',
-		date: currentDate,
-	},
-	{
-		name: 'Lukian',
-		pokemonSeen: 15,
-		comment: 'Best pokemon ever! ',
-		date: currentDate,
-	},
-	{
-		name: 'Lukian',
-		pokemonSeen: 15,
-		comment: 'Best pokemon ever! ',
-		date: currentDate,
-	},
-];
 const CommentsSection = () => {
-	const [comments, setComments] = useState(initialState);
+	const { comments } = useContext(CommentsContext);
 
 	return (
 		<section className={styles.commentsSection}>

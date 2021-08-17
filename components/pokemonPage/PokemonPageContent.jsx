@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
 import Image from 'next/image';
 import styles from '../../styles/PokemonPage.module.scss';
 import FavButton from '../general/FavButton';
-import { FavoritesContextProvider } from '../general/FavoritesContext';
 import CommentsSection from './CommentsSection';
 import CommentsForm from './CommentsForm';
+import { FavoritesContextProvider } from '../general/FavoritesContext';
+import { CommentsContextProvider } from '../general/CommentsContext';
+
 import placeholder from '../../public/placeholder.jpg';
 
 const PokemonPageContent = ({ pokemon }) => {
-	useEffect(() => {
-		console.log(pokemon);
-	}, []);
-
 	const allStats = pokemon.stats.map((stat, idx) => {
 		return (
 			<span key={idx}>
@@ -19,10 +16,12 @@ const PokemonPageContent = ({ pokemon }) => {
 			</span>
 		);
 	});
-	const firstThreeMovesArray = [...pokemon.moves].splice(0, 3);
-	const moves = firstThreeMovesArray.map((move, idx) => {
+
+	const firstThreeMoves = [...pokemon.moves].splice(0, 3);
+	const moves = firstThreeMoves.map((move, idx) => {
 		return <span key={idx}> &nbsp;{move.move.name}, &nbsp;</span>;
 	});
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.pokemonInfo}>
@@ -50,8 +49,10 @@ const PokemonPageContent = ({ pokemon }) => {
 				</div>
 			</div>
 			<div className={styles.commentsContainer}>
-				<CommentsSection />
-				<CommentsForm />
+				<CommentsContextProvider>
+					<CommentsSection />
+					<CommentsForm />
+				</CommentsContextProvider>
 			</div>
 		</div>
 	);

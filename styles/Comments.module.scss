@@ -24,6 +24,8 @@
 			font-size: 1.5em;
 			align-self: center;
 			margin: 0 0.5em;
+			border: 1px solid black;
+			text-transform: capitalize;
 		}
 		.commentDetails {
 			width: 88%;
@@ -38,6 +40,7 @@
 				.name {
 					color: white;
 					font-weight: bold;
+					text-transform: capitalize;
 				}
 				.date {
 					color: lightblue;
@@ -149,6 +152,12 @@
 			&:active {
 				box-shadow: inset 0px 3px 7px #3c4fe0;
 				transform: translateY(2px);
+			}
+			&:disabled {
+				cursor: default;
+				transform: none;
+				background: gray;
+				box-shadow: none;
 			}
 			svg {
 				margin-right: 0.3em;
