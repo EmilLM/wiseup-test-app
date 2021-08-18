@@ -2,21 +2,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Use the following commands to start the app:
 
 ```bash
+
+npm install
 npm run dev
-# or
-yarn dev
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Favorites/Comments persistence is done in FavoritesContext/CommentsContext via localStorage.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+All Pokemon and individual Pokemon data is pre-fetched in an async function below the page components.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Next.js handles caching pre-fetched data if possible, mostly depends on the type of pre-rendering. See [Next.js Documentation](https://nextjs.org/docs/basic-features/data-fetching) for more info.
+
+Wanted to add pagination api calls caching using localStorage, but according to the Chrome devTools, those requests get chached automatically as well.
 
 ## Learn More
 

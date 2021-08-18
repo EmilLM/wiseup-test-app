@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import Layout from '../components/general/Layout';
 import MainPageContent from '../components/mainPage/MainPageContent';
+import axios from 'axios';
 
-export default function Home() {
+export default function Home({ data }) {
 	return (
 		<>
 			<Head>
@@ -11,8 +12,18 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Layout name='PoKeMoN'>
-				<MainPageContent />
+				<MainPageContent pokemon={data} />
 			</Layout>
 		</>
 	);
+}
+
+export async function getStaticProps() {
+	const { data } = await axios(
+		'https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0'
+	);
+
+	return {
+		props: { data },
+	};
 }

@@ -7,52 +7,48 @@ export const FavoritesContextProvider = (props) => {
 
 	const addFavorite = (pokemon) => {
 		setFavorites([...favorites, pokemon]);
-		console.log(favorites);
 	};
 
 	const removeFavorite = (pokemon) => {
 		const remainingFavorites = favorites.filter(
 			(item) => item.name != pokemon.name
 		);
+		const jsonValue = JSON.stringify(remainingFavorites);
+		window.localStorage.setItem('Favorites', jsonValue);
 		setFavorites(remainingFavorites);
 	};
 
-	// const saveFavorites = async (favs, uid) => {
-	// 	try {
-	// 		const jsonValue = JSON.stringify(favs);
-	// 		await AsyncStorage.setItem(`@favorites-${uid}`, jsonValue);
-	// 	} catch (e) {
-	// 		console.log('saving Favs', e);
-	// 	}
-	// };
+	const saveFavorites = (favs) => {
+		const jsonValue = JSON.stringify(favs);
+		window.localStorage.setItem('Favorites', jsonValue);
+	};
 
-	// const loadFavorites = async (uid) => {
-	// 	try {
-	// 		const value = await AsyncStorage.getItem(`@favorites-${uid}`);
-	// 		if (value !== null) {
-	// 			setFavorites(JSON.parse(value));
-	// 			// setFavorites([]);
-	// 		}
-	// 	} catch (e) {
-	// 		console.log('loading Favs', e);
-	// 	}
-	// };
+	const loadFavorites = () => {
+		const value = window.localStorage.getItem('Favorites');
+		if (value !== null) {
+			setFavorites(JSON.parse(value));
+		}
+	};
 
-	// useEffect(() => {
-	// 	if (user && user.uid) {
-	// 	  loadFavorites(user.uid);
-	// 	}
-	//   }, [user]);
+	useEffect(() => {
+		loadFavorites();
+	}, []);
 
-	//   useEffect(() => {
-	// 	if (user && user.uid && favorites.length) {
-	// 	  saveFavorites(favorites, user.uid);
-	// 	}
-	//   }, [favorites, user]);
+	useEffect(() => {
+		if (favorites.length !== 0) {
+			saveFavorites(favorites);
+		}
+	}, [favorites]);
 
 	return (
 		<FavoritesContext.Provider
-			value={{ favorites, addFavorite, removeFavorite }}
+			value={{
+				favorites,
+				addFavorite,
+				removeFavorite,
+				saveFavorites,
+				loadFavorites,
+			}}
 		>
 			{props.children}
 		</FavoritesContext.Provider>

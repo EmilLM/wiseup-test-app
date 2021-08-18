@@ -29,7 +29,6 @@ const CommentsForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		addComments(commentFormState);
-		console.log('form', commentFormState);
 		setCommentFormState({
 			name: '',
 			pokemonSeen: '',

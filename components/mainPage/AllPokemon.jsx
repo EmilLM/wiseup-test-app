@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from '../../styles/MainPage.module.scss';
 import PokemonCard from '../general/PokemonCard';
+import { RiLoader3Fill } from 'react-icons/ri';
 
-const AllPokemon = () => {
-	const [pokemonData, setPokemonData] = useState(null);
+const AllPokemon = ({ pokemon }) => {
+	const [pokemonData, setPokemonData] = useState(pokemon);
+
 	const [url, setUrl] = useState(
 		'https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0'
 	);
@@ -13,27 +15,32 @@ const AllPokemon = () => {
 		try {
 			const { data } = await axios(url);
 			setPokemonData(data);
-			console.log(data);
 		} catch (e) {
 			console.error(e);
 		}
 	};
 	const handleNext = () => {
-		setUrl(pokemonData?.next);
-		console.log(url);
+		setUrl(pokemonData.next);
 	};
 
 	const handlePrevious = () => {
-		setUrl(pokemonData?.previous);
+		setUrl(pokemonData.previous);
 	};
-
-	const pokemonCards = pokemonData?.results.map((pokemon) => (
-		<PokemonCard key={pokemon.name} pokemon={pokemon} />
-	));
 
 	useEffect(() => {
 		getPokemonData();
 	}, [url]);
+
+	const pokemonCards = pokemonData?.results.map((pkm) => (
+		<PokemonCard key={pkm.name} pokemon={pkm} />
+	));
+
+	if (!pokemon || !pokemonData)
+		return (
+			<div className={styles.loader}>
+				<RiLoader3Fill />
+			</div>
+		);
 
 	return (
 		<div className={styles.container}>
@@ -45,7 +52,7 @@ const AllPokemon = () => {
 					disabled={!pokemonData?.previous}
 					onClick={handlePrevious}
 				>
-					Previous
+					Prev
 				</button>
 				<span>|</span>
 				<button

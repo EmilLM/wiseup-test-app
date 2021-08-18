@@ -5,14 +5,14 @@ import TabNav from './TabNav';
 import React, { useState } from 'react';
 import { FavoritesContextProvider } from '../general/FavoritesContext';
 
-const MainPageContent = () => {
+const MainPageContent = ({ pokemon }) => {
 	const [showAll, setShowAll] = useState(true);
 
 	return (
 		<main className={styles.main}>
 			<TabNav showAll={showAll} setShowAll={setShowAll} />
 			<FavoritesContextProvider>
-				{showAll ? <AllPokemon /> : <FavoritePokemon />}
+				{showAll ? <AllPokemon pokemon={pokemon} /> : <FavoritePokemon />}
 			</FavoritesContextProvider>
 		</main>
 	);

@@ -1,44 +1,42 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { getDate } from '../../utils/utils';
-import { v4 as uuidv4 } from 'uuid';
 
 export const CommentsContext = createContext();
 
-const initialState = [
-	{
-		id: uuidv4(),
-		name: 'Emil',
-		pokemonSeen: 5,
-		comment: 'Best pokemon ever! ',
-		date: getDate(),
-	},
-	{
-		id: uuidv4(),
-		name: 'Luchian',
-		pokemonSeen: 15,
-		comment: 'This one is so cool',
-		date: getDate(),
-	},
-];
-
 export const CommentsContextProvider = (props) => {
-	const [comments, setComments] = useState(initialState);
+	const [comments, setComments] = useState([]);
 
-	console.log('ls', global.localStorage);
-	useEffect(() => {
-		console.log('wls', window.localStorage);
-	});
-
-	
 	const addComments = (comment) => {
 		setComments([...comments, comment]);
-		console.log(comments);
 	};
 
 	const removeComments = (comment) => {
 		const remainingComments = comments.filter((item) => item.id != comment.id);
+		const jsonValue = JSON.stringify(remainingComments);
+		window.localStorage.setItem('Comments', jsonValue);
 		setComments(remainingComments);
 	};
+
+	const saveComments = (comments) => {
+		const jsonValue = JSON.stringify(comments);
+		window.localStorage.setItem('Comments', jsonValue);
+	};
+
+	const loadComments = () => {
+		const value = window.localStorage.getItem('Comments');
+		if (value !== null) {
+			setComments(JSON.parse(value));
+		}
+	};
+
+	useEffect(() => {
+		loadComments();
+	}, []);
+
+	useEffect(() => {
+		if (comments.length !== 0) {
+			saveComments(comments);
+		}
+	}, [comments]);
 
 	return (
 		<CommentsContext.Provider value={{ comments, addComments, removeComments }}>
